@@ -1,0 +1,21 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl Concrete_Scored_Jointless
+Ka 0.000000 0.000000 0.000000
+Kd 0.549020 0.521569 0.498039
+Ks 0.330000 0.330000 0.330000
+map_Kd EFT/Concrete_Scored_Jointless.jpg
+
+newmtl Metal_Steel_Textured
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.431373 0.482353
+Ks 0.330000 0.330000 0.330000
+map_Kd EFT/Metal_Steel_Textured.jpg
+
