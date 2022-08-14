@@ -2,57 +2,79 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class MazeRunner : MonoBehaviour
 {
 
     public float speed;
     public float angularSpeed;
+    public TextMeshProUGUI scoreText;
+    public int totalPickups;
 
     private Rigidbody rb;
+    private Vector3 angularVelocity;
     private float movementX;
     private float movementY;
+    private int score, stage;
 
-    // Start is called before the first frame update
     void Start()
     {
+        // rigid body of self
         rb = GetComponent<Rigidbody>();
+
+        // rotate about y-axis
+        angularVelocity = new Vector3(0, angularSpeed, 0);
+
+        // Display results initially
+        score = 0;
+        stage = 1;
+        SetScoreText();
     }
 
-    void OnMove(InputValue movementValue)
+    void SetScoreText()
     {
-        Vector2 movementVector = movementValue.Get<Vector2>();
-        movementX = movementVector.x;
-        movementY = movementVector.y;
+        // update score
+        scoreText.text = "Stage: " + stage.ToString() + "\nScore: " + score.ToString() + "/" + totalPickups.ToString();
     }
 
-    //void FixedUpdate()
-    //{
-    //    Vector3 translation = new Vector3(movementX, 0.0f, movementY);
-    //    rb.AddForce(translation * speed);
-
-    //    float turn = Input.GetAxis("Horizontal");
-    //    rb.AddTorque(turn * angularSpeed * transform.up);
-    //}
-
-    //Update is called once per frame
     void FixedUpdate()
     {
+        // transform locally
         if (Input.GetKey(KeyCode.W))
         {
-            rb.AddForce(Vector3.forward * speed * Time.deltaTime);
+            rb.MovePosition(transform.position + rb.transform.forward * Time.deltaTime * speed);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            rb.AddForce(-Vector3.forward * speed * Time.deltaTime);
+            rb.MovePosition(transform.position + -rb.transform.forward * Time.deltaTime * speed);
         }
+
+        // Rotate about y-axis
         if (Input.GetKey(KeyCode.A))
         {
-            rb.AddRelativeTorque(Input.GetAxis("Horizontal") * angularSpeed * Vector3.up);
+            Quaternion deltaRotation = Quaternion.Euler(-angularVelocity * Time.fixedDeltaTime);
+            rb.MoveRotation(rb.rotation * deltaRotation);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            rb.AddRelativeTorque(Input.GetAxis("Horizontal") * angularSpeed * Vector3.down);
+            Quaternion deltaRotation = Quaternion.Euler(angularVelocity * Time.fixedDeltaTime);
+            rb.MoveRotation(rb.rotation * deltaRotation);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("loafBaguette"))
+        {
+            // Disable contacted object
+            other.gameObject.SetActive(false);
+
+            // Increase score
+            score++;
+
+            // Update score text
+            SetScoreText();
         }
     }
 }
