@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MazeRunner : MonoBehaviour
 {
 
     public float speed;
     public float angularSpeed;
-    Rigidbody rb;
+
+    private Rigidbody rb;
+    private float movementX;
+    private float movementY;
 
     // Start is called before the first frame update
     void Start()
@@ -15,29 +19,40 @@ public class MazeRunner : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
+    void OnMove(InputValue movementValue)
+    {
+        Vector2 movementVector = movementValue.Get<Vector2>();
+        movementX = movementVector.x;
+        movementY = movementVector.y;
+    }
+
+    //void FixedUpdate()
+    //{
+    //    Vector3 translation = new Vector3(movementX, 0.0f, movementY);
+    //    rb.AddForce(translation * speed);
+
+    //    float turn = Input.GetAxis("Horizontal");
+    //    rb.AddTorque(turn * angularSpeed * transform.up);
+    //}
+
+    //Update is called once per frame
     void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.W))
         {
-            //transform.Translate(Vector3.forward * Time.deltaTime * speed);
-            rb.MovePosition(transform.position + Vector3.forward * Time.deltaTime * speed);
+            rb.AddForce(Vector3.forward * speed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            //transform.Translate(-Vector3.forward * Time.deltaTime * speed);
-            rb.MovePosition(transform.position - Vector3.forward * Time.deltaTime * speed);
+            rb.AddForce(-Vector3.forward * speed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(0, -angularSpeed, 0);
+            rb.AddRelativeTorque(Input.GetAxis("Horizontal") * angularSpeed * Vector3.up);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(0, angularSpeed, 0);
+            rb.AddRelativeTorque(Input.GetAxis("Horizontal") * angularSpeed * Vector3.down);
         }
-
-        Vector3 directions = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        rb.MovePosition(transform.position + directions * Time.deltaTime * speed);
     }
 }
