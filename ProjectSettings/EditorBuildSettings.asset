@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Template/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MiniGame.unity
     guid: 5d02ecefb007cee40afd5d407df20740
+  - enabled: 1
+    path: Assets/Scenes/France.unity
+    guid: 4010459565c08404dbf889db7dc73307
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9504d2a785a27c94fbfed861c3908e08,
       type: 2}
