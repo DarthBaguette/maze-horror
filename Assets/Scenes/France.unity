@@ -431,7 +431,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &72781142
 Light:
   m_ObjectHideFlags: 0
@@ -4189,9 +4189,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Stage 1 Complete
-
-    Find teleporter to proceed to Stage 2!'
+  m_text: Stage 1 text.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4768,7 +4766,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 807029478}
-  - component: {fileID: 807029476}
   - component: {fileID: 807029480}
   - component: {fileID: 807029479}
   - component: {fileID: 807029481}
@@ -4782,25 +4779,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &807029476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 807029475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c70be931153085d4899113257688f50e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  angularSpeed: 0
-  scoreText: {fileID: 0}
-  winTextObject: {fileID: 0}
-  startTextObject: {fileID: 0}
-  totalPickups: 0
-  teleport: {fileID: 0}
 --- !u!4 &807029478
 Transform:
   m_ObjectHideFlags: 0
@@ -4862,10 +4840,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   angularSpeed: 60
-  scoreText: {fileID: 1023097669}
-  winTextObject: {fileID: 664021653}
-  startTextObject: {fileID: 2100668601}
   totalPickups: 5
+  startTextObject: {fileID: 2100668601}
+  scoreText: {fileID: 1023097669}
+  portalTextObject: {fileID: 664021655}
   teleport: {fileID: 4157613247186180927}
 --- !u!114 &807029482
 MonoBehaviour:

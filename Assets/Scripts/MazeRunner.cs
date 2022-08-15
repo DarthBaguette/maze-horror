@@ -8,10 +8,10 @@ public class MazeRunner : MonoBehaviour
 {
     public float speed;
     public float angularSpeed;
-    public TextMeshProUGUI scoreText;
-    public GameObject winTextObject;
-    public TextMeshProUGUI startTextObject;
     public int totalPickups;
+    public TextMeshProUGUI startTextObject;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI portalTextObject;
     public GameObject teleport;
 
     private Rigidbody rb;
@@ -35,27 +35,27 @@ public class MazeRunner : MonoBehaviour
         // Initial display
         score = 0;
         stage = 1;
+        portalTextObject.enabled = false;
         SetScoreText();
-        winTextObject.SetActive(false);
-        StartCoroutine(ShowInstructions("Collect all baguettes!", 5));
+        StartCoroutine(DisplayMessage(startTextObject, "Collect all baguettes.", 5));
     }
 
     // Display a temporary message
-    IEnumerator ShowInstructions(string message, float delay)
+    IEnumerator DisplayMessage(TextMeshProUGUI textObject, string message, float delay)
     {
-        startTextObject.text = message;
-        startTextObject.enabled = true;
+        textObject.text = message;
+        textObject.enabled = true;
         yield return new WaitForSeconds(delay);
-        startTextObject.enabled = false;
+        textObject.enabled = false;
     }
 
     void SetScoreText()
     {
         // update score
         scoreText.text = "Stage: " + stage.ToString() + "\nScore: " + score.ToString() + "/" + totalPickups.ToString();
-        if (score >= totalPickups)
+        if (score >= 1)
         {
-            winTextObject.SetActive(true);
+            StartCoroutine(DisplayMessage(portalTextObject, "Stage 1 complete.\nFind portal at entrance.", 5));
             teleport.SetActive(true);
         }
     }
