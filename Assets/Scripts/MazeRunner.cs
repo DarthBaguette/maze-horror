@@ -53,7 +53,7 @@ public class MazeRunner : MonoBehaviour
     {
         // update score
         scoreText.text = "Stage: " + stage.ToString() + "\nScore: " + score.ToString() + "/" + totalPickups.ToString();
-        if (score >= 1)
+        if (score >= totalPickups)
         {
             StartCoroutine(DisplayMessage(portalTextObject, "Stage 1 complete.\nFind portal at entrance.", 5));
             teleport.SetActive(true);
