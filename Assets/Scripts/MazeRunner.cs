@@ -6,17 +6,20 @@ using TMPro;
 
 public class MazeRunner : MonoBehaviour
 {
-
     public float speed;
     public float angularSpeed;
     public TextMeshProUGUI scoreText;
+    public GameObject winTextObject;
+    public TextMeshProUGUI startTextObject;
     public int totalPickups;
+    public GameObject teleport;
 
     private Rigidbody rb;
     private Vector3 angularVelocity;
     private float movementX;
     private float movementY;
-    private int score, stage;
+    private int score;
+    private int stage;
 
     void Start()
     {
@@ -26,16 +29,35 @@ public class MazeRunner : MonoBehaviour
         // rotate about y-axis
         angularVelocity = new Vector3(0, angularSpeed, 0);
 
-        // Display results initially
+        // hide teleport object
+        teleport.SetActive(false);
+
+        // Initial display
         score = 0;
         stage = 1;
         SetScoreText();
+        winTextObject.SetActive(false);
+        StartCoroutine(ShowInstructions("Collect all baguettes!", 5));
+    }
+
+    // Display a temporary message
+    IEnumerator ShowInstructions(string message, float delay)
+    {
+        startTextObject.text = message;
+        startTextObject.enabled = true;
+        yield return new WaitForSeconds(delay);
+        startTextObject.enabled = false;
     }
 
     void SetScoreText()
     {
         // update score
         scoreText.text = "Stage: " + stage.ToString() + "\nScore: " + score.ToString() + "/" + totalPickups.ToString();
+        if (score >= totalPickups)
+        {
+            winTextObject.SetActive(true);
+            teleport.SetActive(true);
+        }
     }
 
     void FixedUpdate()
@@ -65,7 +87,7 @@ public class MazeRunner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("loafBaguette"))
+        if (other.gameObject.CompareTag("Baguette"))
         {
             // Disable contacted object
             other.gameObject.SetActive(false);
