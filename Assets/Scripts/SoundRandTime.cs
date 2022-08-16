@@ -17,11 +17,8 @@ public class SoundRandTime : MonoBehaviour
         audioSource.Play();
 
         float randomTime = Random.Range(7, 25);
+
+        Invoke("PlayGrowl", randomTime);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

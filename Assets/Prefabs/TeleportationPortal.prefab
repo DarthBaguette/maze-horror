@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 691212176934815013}
   - component: {fileID: 3347118565077496303}
   - component: {fileID: 752800180425822580}
+  - component: {fileID: -2095685912454741939}
   m_Layer: 0
   m_Name: TeleportationPortal
   m_TagString: Untagged
@@ -97,3 +98,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.03215955, y: 0.009405523, z: 0.03829121}
   m_Center: {x: 0, y: 0, z: 0.019178793}
+--- !u!114 &-2095685912454741939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3851605629514846266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23c135c9ab78b7c4d8bf58c6f66a4741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  offset: 0

@@ -13,6 +13,7 @@ public class MazeRunner : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI portalTextObject;
     public GameObject teleport;
+    public AudioSource pickupSound;
 
     private Rigidbody rb;
     private Vector3 angularVelocity;
@@ -32,7 +33,7 @@ public class MazeRunner : MonoBehaviour
         // hide teleport object
         teleport.SetActive(false);
 
-        // Initial display
+        // initial canvas
         score = 0;
         stage = 1;
         portalTextObject.enabled = false;
@@ -97,6 +98,8 @@ public class MazeRunner : MonoBehaviour
 
             // Update score text
             SetScoreText();
+
+            pickupSound.Play();
         }
     }
 }
